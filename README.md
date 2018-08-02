@@ -15,3 +15,25 @@ Inter species classification
 
 Code for reviewing:- 
 Have a look at the make_pairs.py. A problem in the batch tensor generation.
+
+## Data Augmentation
+Data Augmentation has been done using [imgaug](https://imgaug.readthedocs.io/en/latest/source/augmenters.html#affine).Table for data Augmentation of bird species:
+
+|Species| Gaussian Noise | Gaussian Blur|Flip|Contrast|Hue|Add|Multiply|Sharp|Affine|Total|
+|--------------------|----------------| -------------|----|--------|---|---|--------|-----|------|-----|
+|blasti| ✔|✔|✔|✔|✔|✘|✘|✘|✘|
+|bonegl| ✔|✔|✔|✔|✔|✔|✔|✔|✔|
+brhkyt | ✔|✔|✔|✔|✔|✔|✔|✔|✔|
+cbrtsh| ✔|✔|✔|✔|✔|✔|✔|✔|✔|
+cmnmyn| ✔|✔|✔|✔|✔|✔|✔|✔|✔|
+gretit| ✔|✔|✔|✔|✔|✔|✔|✔|✔|
+hilpig| ✔|✔|✔|✔|✔|✔|✔|✘|✘|
+himbul| ✔|✔|✔|✔|✔|✘|✘|✘|✘|
+himgri| ✔|✔|✔|✔|✔|✘|✘|✘|✘|
+hsparo| ✔|✔|✔|✔|✔|✘|✘|✘|✘|
+indvul| ✔|✔|✔|✔|✔|✘|✘|✘|✘|
+jglowl| ✔|✔|✔|✔|✔|✔|✔|✔|✔|
+lbicrw| ✔|✔|✔|✔|✔|✔|✔|✔|✔|
+mgprob| ✔|✔|✔|✔|✔|✔|✔|✔|✔|
+rebimg| ✔|✔|✔|✔|✔|✔|✔|✘|✘|
+wcrsrt| ✔|✔|✔|✔|✔|✔|✔|✘|✘|
