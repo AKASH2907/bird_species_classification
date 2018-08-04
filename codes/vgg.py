@@ -9,8 +9,8 @@ from time import time
 import math
 from keras.applications.vgg16 import VGG16
 from keras.applications.vgg19 import VGG19
-
-batch_size = 16
+from keras import backend as K
+batch_size = 32
 
 def step_decay(epoch):
     initial_lrate = 0.01
@@ -19,6 +19,65 @@ def step_decay(epoch):
     lrate = initial_lrate * math.pow(drop, math.floor((epoch)/epochs_drop))
     return lrate
 
+def precision(y_true, y_pred):
+    """Precision metric.
+
+    Only computes a batch-wise average of precision.
+
+    Computes the precision, a metric for multi-label classification of
+    how many selected items are relevant.
+    """
+    true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
+    predicted_positives = K.sum(K.round(K.clip(y_pred, 0, 1)))
+    precision = true_positives / (predicted_positives + K.epsilon())
+    return precision
+
+
+def recall(y_true, y_pred):
+    """Recall metric.
+
+    Only computes a batch-wise average of recall.
+
+    Computes the recall, a metric for multi-label classification of
+    how many relevant items are selected.
+    """
+    true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
+    possible_positives = K.sum(K.round(K.clip(y_true, 0, 1)))
+    recall = true_positives / (possible_positives + K.epsilon())
+    return recall
+
+
+def f1(y_true, y_pred):
+    def precision(y_true, y_pred):
+        """Precision metric.
+
+        Only computes a batch-wise average of precision.
+
+        Computes the precision, a metric for multi-label classification of
+        how many selected items are relevant.
+        """
+        true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
+        predicted_positives = K.sum(K.round(K.clip(y_pred, 0, 1)))
+        precision = true_positives / (predicted_positives + K.epsilon())
+        return precision
+
+
+    def recall(y_true, y_pred):
+        """Recall metric.
+
+        Only computes a batch-wise average of recall.
+
+        Computes the recall, a metric for multi-label classification of
+        how many relevant items are selected.
+        """
+        true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
+        possible_positives = K.sum(K.round(K.clip(y_true, 0, 1)))
+        recall = true_positives / (possible_positives + K.epsilon())
+        return recall
+    precision = precision(y_true, y_pred)
+    recall = recall(y_true, y_pred)
+    print(precision, recall)
+    return (2*((precision*recall)/(precision+recall+K.epsilon())))
 
 
 def build_vgg(img_shape=(416, 416, 3), n_classes=16, n_layers=16, l2_reg=0.,
@@ -42,9 +101,9 @@ def build_vgg(img_shape=(416, 416, 3), n_classes=16, n_layers=16, l2_reg=0.,
     # Add final layers
     x = base_model.output
     x = Flatten(name="flatten")(x)
-    x = Dense(512, activation='relu', name='dense_1')(x)
+    x = Dense(1024, activation='relu', name='dense_1')(x)
     x = Dropout(0.5)(x)
-    x = Dense(64, activation='relu', name='dense_2')(x)
+    x = Dense(256, activation='relu', name='dense_2')(x)
     x = Dropout(0.5)(x)
     x = Dense(n_classes, name='dense_3_{}'.format(n_classes))(x)
     predictions = Activation("softmax", name="softmax")(x)
@@ -66,29 +125,25 @@ def build_vgg(img_shape=(416, 416, 3), n_classes=16, n_layers=16, l2_reg=0.,
                layer.trainable = False
             for layer in model.layers[freeze_layers_from:]:
                layer.trainable = True
-
-    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    adam = Adam(0.0001)
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=[precision, recall, f1])
 
     return model 
 
 
-train_datagen = ImageDataGenerator(
-        rescale=1./255,
-        shear_range=0.2,
-        zoom_range=0.2,
-        horizontal_flip=True)
+train_datagen = ImageDataGenerator(rescale=1./255)
 
 test_datagen = ImageDataGenerator(rescale=1./255)
 
 
 train_generator = train_datagen.flow_from_directory(
-        'data/train',  # this is the target directory
+        'train/',  # this is the target directory
         target_size=(416, 416),  # images resized to 1000*1000
         batch_size=batch_size,
         class_mode='categorical')
 
 validation_generator = test_datagen.flow_from_directory(
-        'data/test',  
+        'test/',  
         target_size=(416, 416),  # images  resized to 1000*1000
         batch_size=batch_size,
         class_mode='categorical')
@@ -96,19 +151,19 @@ validation_generator = test_datagen.flow_from_directory(
 
 training = build_vgg()
 
-filepath = "vgg_wts/vgg16-1-{epoch:02d}-{val_acc:.2f}.hdf5"
-checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose =1, save_best_only=True, mode='max', save_weights_only=True)
-early_stopper = EarlyStopping(monitor='val_acc', verbose=1, patience=3)
+filepath = "wts/vgg/vgg16-1-{epoch:02d}-{val_acc:.2f}.hdf5"
+checkpoint = ModelCheckpoint(filepath, monitor='val_f1', verbose =1, save_best_only=True, mode='max', save_weights_only=True)
+early_stopper = EarlyStopping(monitor='val_f1', verbose=1, patience=3)
 tensorboard = TensorBoard(log_dir="logs/{}".format(time()))
 lrate = LearningRateScheduler(step_decay)
-callback_list = [checkpoint, early_stopper, tensorboard, lrate]
+callback_list = [checkpoint, tensorboard]
 
-training.fit_generator(
+history = training.fit_generator(
         train_generator,
-        steps_per_epoch=1600 // batch_size,
+        steps_per_epoch=1600//batch_size,
         epochs=15,
-        validation_data=validation_generator,
+        # validation_data=validation_generator,
         # validation_steps=800 // batch_size
-        callbacks= callback_list
+        # callbacks= [checkpoint, tensorboard]
         )
-model.save_weights('vgg16_1.h5')
+training.save_weights('wts/vgg16_1.h5') 
