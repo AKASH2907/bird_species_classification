@@ -16,4 +16,4 @@
 
 8) [alex_new.py](https://github.com/AKASH2907/bird-species-classification/blob/master/working%20codes/alex_new.py) - AlexNet network using gen_array.py to create training and testing dataset.
 
-9) [testing.py] (https://github.com/AKASH2907/bird-species-classification/blob/master/working%20codes/testing.py) - Evaluate Models using Image Data generator
+9) [testing.py](https://github.com/AKASH2907/bird-species-classification/blob/master/working%20codes/testing.py) - Evaluate Models using Image Data generator
