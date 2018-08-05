@@ -12,6 +12,8 @@
 
 6) [siamese_net.py](https://github.com/AKASH2907/bird-species-classification/blob/master/working%20codes/siamese_net.py) - Siamese Network Implementation using create_pairs.py
 
-7) [vgg_new.py]() - VGG16 network using gen_array.py to create training and testing dataset.
+7) [vgg_new.py](https://github.com/AKASH2907/bird-species-classification/blob/master/working%20codes/vgg_new.py) - VGG16 network using gen_array.py to create training and testing dataset.
 
-8) [alex_new.py]() - AlexNet network using gen_array.py to create training and testing dataset.
+8) [alex_new.py](https://github.com/AKASH2907/bird-species-classification/blob/master/working%20codes/alex_new.py) - AlexNet network using gen_array.py to create training and testing dataset.
+
+9) [testing.py] (https://github.com/AKASH2907/bird-species-classification/blob/master/working%20codes/testing.py) - Evaluate Models using Image Data generator
