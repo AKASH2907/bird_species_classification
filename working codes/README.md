@@ -6,6 +6,8 @@
 
 3) [aug_test.py](https://github.com/AKASH2907/bird-species-classification/blob/master/working%20codes/aug_test.py) - Augmentation practices for different species of birds to avoid class imbalance.
 
-4) [vgg_old.py]() - VGG16 architecture to classify images using Image Data Generator
+4) [vgg_old.py](https://github.com/AKASH2907/bird-species-classification/blob/master/working%20codes/vgg_old.py) - VGG16 architecture to classify images using Image Data Generator
 
-5) [alex_old.py]() - AlexNet architecture to clasiify images using Image Data Generator
+5) [alex_old.py](https://github.com/AKASH2907/bird-species-classification/blob/master/working%20codes/alex_old.py) - AlexNet architecture to clasiify images using Image Data Generator
+
+6) [siamese_net.py]() - Siamese Network Implementation using create_pairs.py
