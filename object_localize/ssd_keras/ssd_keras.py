@@ -9,6 +9,7 @@ from os.path import isfile, join
 from os import rename, listdir, rename, makedirs
 from keras_ssd512 import ssd_512
 from keras_loss_function.keras_ssd_loss import SSDLoss
+import cv2
 # from keras_layers.keras_layer_AnchorBoxes import AnchorBoxes
 # from keras_layers.keras_layer_DecodeDetections import DecodeDetections
 # from keras_layers.keras_layer_DecodeDetectionsFast import DecodeDetectionsFast
@@ -24,34 +25,39 @@ from ssd_encoder_decoder.ssd_output_decoder import decode_detections, decode_det
 img_height = 512
 img_width = 512
 
-species = ["blasti", "bonegl", "brhkyt", "cbrtsh", "cmnmyn", "gretit", "hilpig", "himbul", "himgri", "hsparo", "indvul"
-    , "jglowl", "lbicrw", "mgprob", "rebimg", "wcrsrt"]
+species = [ "bonegl", "brhkyt", "cbrtsh", "cmnmyn", "gretit", "hilpig", "himbul", "himgri", "hsparo", "indvul"
+	, "jglowl", "lbicrw", "mgprob", "rebimg", "wcrsrt"]
 datapath = '../train_data/'
+species_check = ["blasti"]
+
+
+
 model = ssd_512(image_size=(img_height, img_width, 3),
-                n_classes=20,
-                mode='inference',
-                l2_regularization=0.0005,
-                scales=[0.07, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05], # The scales for MS COCO are [0.04, 0.1, 0.26, 0.42, 0.58, 0.74, 0.9, 1.06]
-                aspect_ratios_per_layer=[[1.0, 2.0, 0.5],
-                                         [1.0, 2.0, 0.5, 3.0, 1.0/3.0],
-                                         [1.0, 2.0, 0.5, 3.0, 1.0/3.0],
-                                         [1.0, 2.0, 0.5, 3.0, 1.0/3.0],
-                                         [1.0, 2.0, 0.5, 3.0, 1.0/3.0],
-                                         [1.0, 2.0, 0.5],
-                                         [1.0, 2.0, 0.5]],
-               two_boxes_for_ar1=True,
-               steps=[8, 16, 32, 64, 128, 256, 512],
-               offsets=[0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-               clip_boxes=False,
-               variances=[0.1, 0.1, 0.2, 0.2],
-               normalize_coords=True,
-               subtract_mean=[123, 117, 104],
-               swap_channels=[2, 1, 0],
-               confidence_thresh=0.3,
-               iou_threshold=0.45,
-               top_k=200,
-               nms_max_output_size=400
-               )
+				n_classes=20,
+				mode='inference',
+				l2_regularization=0.0005,
+				scales=[0.07, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05], 
+				# The scales for MS COCO are [0.04, 0.1, 0.26, 0.42, 0.58, 0.74, 0.9, 1.06]
+				aspect_ratios_per_layer=[[1.0, 2.0, 0.5],
+										 [1.0, 2.0, 0.5, 3.0, 1.0/3.0],
+										 [1.0, 2.0, 0.5, 3.0, 1.0/3.0],
+										 [1.0, 2.0, 0.5, 3.0, 1.0/3.0],
+										 [1.0, 2.0, 0.5, 3.0, 1.0/3.0],
+										 [1.0, 2.0, 0.5],
+										 [1.0, 2.0, 0.5]],
+			   two_boxes_for_ar1=True,
+			   steps=[8, 16, 32, 64, 128, 256, 512],
+			   offsets=[0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+			   clip_boxes=False,
+			   variances=[0.1, 0.1, 0.2, 0.2],
+			   normalize_coords=True,
+			   subtract_mean=[123, 117, 104],
+			   swap_channels=[2, 1, 0],
+			   confidence_thresh=0.5,
+			   iou_threshold=0.55,
+			   top_k=200,
+			   nms_max_output_size=400
+			   )
 
 
 weights_path = '../VGG_VOC0712Plus_SSD_512x512_ft_iter_160000.h5'
@@ -80,26 +86,32 @@ model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 # We'll only load one image in this example.
 for i in species:
 
+	
+
 	path = join(datapath, i)
 	files = listdir(path)
 	files.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
+
+	birds=1
+
 	for file in files:
-		orig_images = [] # Store the images here.
+		
+
 		input_images = [] # Store resized versions of the images here.
 		img_path= join(path, file)
 		print(img_path)
-		orig_images.append(imread(img_path))
+		im = cv2.imread(img_path, 1)
+		x,y,z = im.shape
+		print(x, y)
+
 		img = image.load_img(img_path, target_size=(img_height, img_width))
-		# print(img)
 		img = image.img_to_array(img)
-		# print(img)
 		input_images.append(img)
 		input_images = np.array(input_images)
 
-		# print(input_images)
 
 		y_pred = model.predict(input_images)
-		confidence_threshold = 0.3
+		confidence_threshold = 0.5
 
 		y_pred_thresh = [y_pred[k][y_pred[k,:,1] > confidence_threshold] for k in range(y_pred.shape[0])]
 
@@ -107,3 +119,31 @@ for i in species:
 		print("Predicted boxes:\n")
 		print('   class   conf xmin   ymin   xmax   ymax')
 		print(y_pred_thresh[0])
+		# print(len(y_pred_thresh))
+		# print(len(y_pred_thresh[0]))
+		if len(y_pred_thresh[0])!=0:
+
+			# print(y_pred_thresh[0][0])
+			images = 1
+			x_factor = x// img_height
+			y_factor = y// img_width
+			for j in range(len(y_pred_thresh[0])):
+
+				x_min = y_pred_thresh[0][j][2]* x_factor
+				y_min = y_pred_thresh[0][j][3]* y_factor
+
+				x_max = y_pred_thresh[0][j][4]* x_factor
+				y_max = y_pred_thresh[0][j][5]* y_factor
+
+				# print(y_pred_thresh[0][i][2])
+				cropped_img = im[ int(x_min):int(x_max), int(y_min):int(y_max)]
+				# print(y_max - y_min)
+				# print(x_max - x_min)
+				print(cropped_img.shape)
+				cv2.imwrite('../train_cropped/'+i+'/'+str(birds)+str(images)+'.jpg',cropped_img)
+
+				images+=1
+
+
+		birds += 1
+	break
