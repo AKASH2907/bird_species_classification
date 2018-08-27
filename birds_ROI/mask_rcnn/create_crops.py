@@ -75,42 +75,6 @@ class_names = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
                'keyboard', 'cell phone', 'microwave', 'oven', 'toaster',
                'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors',
                'teddy bear', 'hair drier', 'toothbrush']
-
-
-# Load a random image from the images folder# Load  
-# file_names = next(os.walk(IMAGE_DIR))[2]
-# print(file_names)
-# image = skimage.io.imread(os.path.join(IMAGE_DIR, random.choice(file_names)))
-# # print(image)
-# print(image.shape)
-# img = cv2.imread(os.path.join(IMAGE_DIR, random.choice(file_names)))
-# print(img.shape)
-
-
-
-# Run detection
-# results = model.detect([img], verbose=1)
-
-# # Visualize results
-# r = results[0]
-# # print(results)
-# print(r['rois'])
-# print(len(r['rois']))
-# l1 = r['rois'][0]
-# print(l1)
-# # for i in range(len(r['rois'])):
-# y1, x1, y2, x2 = l1
-# print(y1, x1, y2, x2) 
-# print(r['class_ids'])
-# print(class_names[15])
-# print(r['scores'])
-
-# crop = img[y1:y2, x1:x2]
-# print(crop)
-# cv2.imwrite('cropped.jpg', crop)
-
-
-
 image_path = '../train_data/'
 
 for i in species:
@@ -148,10 +112,6 @@ for i in species:
 				imgs+=1
 
 		birds+=1
-
-		# break
-
-	# break
 
 
 
