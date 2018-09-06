@@ -30,3 +30,15 @@ Mask R-CNN on the whole image helped to localize birds in the image. Below are t
 
 Cases where our model failed are depicted in the below images.
 ![drawbacks](https://user-images.githubusercontent.com/22872200/45113093-0517e500-b167-11e8-9486-f90f8620ae70.jpg)
+
+
+## Test Results
+Results on the test data:
+
+Model Architecture| Data Subset | Train | Validation | Test
+------------- | -------- | ---------  | ---------- | ----------
+Inception V3  | Images| 91.26 | 13.84|30.95 
+Inception V3| Images + Crops| 93.97| 15.50|41.66
+Inception ResNet V2  | Images| 97.29 |29.17  |47.96
+Inception ResNet V2| Images + Crops |92.29|33.69|49.09
+
