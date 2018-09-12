@@ -1,5 +1,10 @@
 ## Data Augmentation
-Data Augmentation has been done using [imgaug](https://imgaug.readthedocs.io/en/latest/source/augmenters.html#affine).Table for data Augmentation of bird species:
+Data Augmentation has been done using [imgaug](https://imgaug.readthedocs.io/en/latest/source/augmenters.html#affine). imgaug can be installed using terminal command as:
+pip install git+https://github.com/aleju/imgaug
+
+The more details of imgaug augmentation at this [site](https://imgaug.readthedocs.io/en/latest/).
+
+Table for data Augmentation of bird species:
 
 |Species| Gaussian Noise | Gaussian Blur|Flip|Contrast|Hue|Add|Multiply|Sharp|Affine|Total|
 |--------------------|----------------| -------------|----|--------|---|---|--------|-----|------|-----|
