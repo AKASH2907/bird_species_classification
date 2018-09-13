@@ -3,11 +3,20 @@ Inter species classification
 
 This is an implementation of bird species classification on Python 3 and Keras with Tensorflow backend. The architecture consists of Mask R-CNN and ImageNet models end-to-end. ImageNet models used are Inception V3 and Inception ResNet V2.
 
+The repository includes:
+* Generate training data for the model
+* Data Augmentation practices
+* Generate bird crops using Mask R-CNN 
+* Finetuning on Image Net models - Inception V3 & Inception ResNet V2
+* Muli- stage Training
+* Mask R-CNN and ImageNet Model combined end-to-end for testing purpose
+* Evauation file for class averaged precision, recall and F1-scores.
 
-**Model trained**
-1) Inception V3 features
-2) Inception ResNet V2 features
+The code is documented and designed to be easy to extend. If you use it in your research, please consider citing this repository (bibtex below). 
 
+Getting Started
+ * [modify_data.py]()
+ * [data_augmentation.py]()
 
 ## Data Augmentation
 Data Augmentation has been done using [imgaug](https://imgaug.readthedocs.io/en/latest/source/augmenters.html#affine).Table for data Augmentation done for different species is shared in data_augmentation folder.
