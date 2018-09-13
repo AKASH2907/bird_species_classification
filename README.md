@@ -1,6 +1,9 @@
 # bird-species-classification
 Inter species classification
 
+This is an implementation of bird species classification on Python 3 and Keras with Tensorflow backend. The architecture consists of Mask R-CNN and ImageNet models end-to-end. ImageNet models used are Inception V3 and Inception ResNet V2.
+
+
 **Model trained**
 1) Inception V3 features
 2) Inception ResNet V2 features
