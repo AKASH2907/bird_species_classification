@@ -15,8 +15,8 @@ The repository includes:
 The code is documented and designed to be easy to extend. If you use it in your research, please consider citing this repository (bibtex below). 
 
 Getting Started
- * [modify_data.py]()
- * [data_augmentation.py]()
+ * [modify_data.py](https://github.com/AKASH2907/bird-species-classification/blob/master/modify_data.py) This code is used to rename the files. For example: 10 - Type of Data Augmentation 01- Class of Bird 01 - Image Number - 100101.jpg (Image Name)
+ * [data_augmentation.py](https://github.com/AKASH2907/bird-species-classification/blob/master/data_augmentation/data_augmentation.py) Various types of data augmentation used to counter the challenge of large scale variation in illumination,scale, etc. and class imbalance.
 
 ## Data Augmentation
 Data Augmentation has been done using [imgaug](https://imgaug.readthedocs.io/en/latest/source/augmenters.html#affine).Table for data Augmentation done for different species is shared in data_augmentation folder.
