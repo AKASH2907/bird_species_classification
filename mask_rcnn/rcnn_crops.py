@@ -9,28 +9,29 @@ import matplotlib.pyplot as plt
 import cv2
 from os.path import isfile, join
 from os import rename, listdir, rename, makedirs
+
 # Root directory of the project
 ROOT_DIR = os.path.abspath("./")
 
-species = ["blasti", "bonegl", "brhkyt", "cbrtsh", "cmnmyn", "gretit", "hilpig", "himbul", "himgri", "hsparo", "indvul"
-    , "jglowl", "lbicrw", "mgprob", "rebimg", "wcrsrt"]
+species = ["blasti","bonegl", "brhkyt", "cbrtsh", "cmnmyn", "gretit", "hilpig", "himbul", "himgri", "hsparo", 
+"indvul", "jglowl", "lbicrw", "mgprob", "rebimg", "wcrsrt"]
 
 # Import Mask RCNN
 sys.path.append(ROOT_DIR)  # To find local version of the library
 from mrcnn import utils
 import mrcnn.model as modellib
 from mrcnn import visualize
+
 # Import COCO config
 sys.path.append(os.path.join(ROOT_DIR, "coco/"))  # To find local version
 import coco
-
-# %matplotlib inline 
 
 # Directory to save logs and trained model
 MODEL_DIR = os.path.join(ROOT_DIR, "logs")
 
 # Local path to trained weights file
 COCO_MODEL_PATH = os.path.join(ROOT_DIR, "mask_rcnn_coco.h5")
+
 # Download COCO trained weights from Releases if needed
 if not os.path.exists(COCO_MODEL_PATH):
     utils.download_trained_weights(COCO_MODEL_PATH)
@@ -75,43 +76,53 @@ class_names = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
                'keyboard', 'cell phone', 'microwave', 'oven', 'toaster',
                'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors',
                'teddy bear', 'hair drier', 'toothbrush']
+
+
+
+
+# Train Images path
 image_path = '../train_data/'
 
+# Load Test images
 for i in species:
 	specie = join(image_path, i)
 
 	files = listdir(specie)
+	# Files sorting
 	files.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
 
 	birds = 1
 
+	# Detect birds in each class
 	for file in files:
 
 		img_path = join(specie, file)
 
-		print(img_path)
 		image = cv2.imread(img_path, 1)
 
 		result = model.detect([image], verbose=1)
 
-		r = result[0]
+		res = result[0]
 
-		l = len(r['rois'])
-		print(l)
-		print(r['class_ids'])
+		number_of_rois = len(res['rois'])
+
 		imgs = 1
-		for j in range(l):
-			if(r['class_ids'][j]==15):
 
-				y1, x1, y2, x2 = r['rois'][j]
+		for j in range(number_of_rois):
+
+			# If bird is found append then crop the bird out of that image
+			if(res['class_ids'][j]==15):
+
+				y1, x1, y2, x2 = res['rois'][j]
 
 				crop = image[y1:y2, x1:x2]
 
-				cv2.imwrite('../mask_rcnn_cropped/' + i + '/' + str(birds) + str(imgs) + '.jpg', crop)
+				cv2.imwrite('../mask_rcnn_crops_test/' + i + '/' + str(birds) + str(imgs) + '.jpg', crop)
 
 				imgs+=1
 
 		birds+=1
+
 
 
 
