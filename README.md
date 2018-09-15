@@ -18,7 +18,7 @@ Getting Started
  * [modify_data.py](https://github.com/AKASH2907/bird-species-classification/blob/master/modify_data.py) This code is used to rename the files. For example: 10 - Type of Data Augmentation 01- Class of Bird 01 - Image Number - 100101.jpg (Image Name)
  * [data_augmentation.py](https://github.com/AKASH2907/bird-species-classification/blob/master/data_augmentation/data_augmentation.py) Various types of data augmentation used to counter the challenge of large scale variation in illumination,scale, etc. and class imbalance.
  * [create_validation.py](https://github.com/AKASH2907/bird-species-classification/blob/master/create_validation.py) Used to create Validation data randomly from the augmented training data.
-
+* [gen_train_data_test_data.py](https://github.com/AKASH2907/bird-species-classification/blob/master/gen_train_data_test_data.py) Generates X_train, Y_train, X_validation, Y_validation, X_test, Y_test
 ## Data Augmentation
 Data Augmentation has been done using [imgaug](https://imgaug.readthedocs.io/en/latest/source/augmenters.html#affine).Table for data Augmentation done for different species is shared in data_augmentation folder.
 
