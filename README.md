@@ -10,7 +10,7 @@ The repository includes:
 * Data Augmentation practices
 * Generate bird crops using Mask R-CNN 
 * Finetuning on Image Net models - Inception V3 & Inception ResNet V2
-* Muli- stage Training
+* Multi- stage Training
 * Mask R-CNN and ImageNet Model combined end-to-end for testing purpose
 * Evauation file for class averaged precision, recall and F1-scores.
 
