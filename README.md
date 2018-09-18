@@ -3,6 +3,8 @@ Inter species classification
 
 This is an implementation of bird species classification on Python 3 and Keras with Tensorflow backend. The architecture consists of Mask R-CNN and ImageNet models end-to-end. ImageNet models used are Inception V3 and Inception ResNet V2.
 
+![main_image](https://user-images.githubusercontent.com/22872200/45708132-49ab7380-bb9e-11e8-8bd5-8beb9f077d90.jpg)
+
 The repository includes:
 * Generate training data for the model
 * Data Augmentation practices
@@ -22,7 +24,9 @@ The code is documented and designed to be easy to extend. If you use it in your 
 * [inception_v3_finetune.py](https://github.com/AKASH2907/bird-species-classification/blob/master/inception_v3_finetune.py) - Multi-stage Training on Mask R-CNN crops generated and then on data augmented original images.
 * [inception_resnet_v2_finetune.py](https://github.com/AKASH2907/bird-species-classification/blob/master/inception_resnet_v2_finetune.py) - Multi-stage Training on Mask R-CNN crops generated and then on data augmented original images resized to 416x416.
 * [mask_rcnn/rcnn_crops.py](https://github.com/AKASH2907/bird-species-classification/blob/master/mask_rcnn/rcnn_crops.py) - Localizes bird in the images, crops and then save them for multi-stage learning.
-* [mask_rcnn/test_images.py](https://github.com/AKASH2907/bird-species-classification/blob/master/mask_rcnn/test_images.py)
+* [mask_rcnn/test_images.py](https://github.com/AKASH2907/bird-species-classification/blob/master/mask_rcnn/test_images.py) - 
+End-to-end model of classifying bird specie using Mask R-CNN and **ensembling** of Inception V3 and Inception ResNet V2.
+
 ## Data Augmentation
 Data Augmentation has been done using [imgaug](https://imgaug.readthedocs.io/en/latest/source/augmenters.html#affine).Table for data Augmentation done for different species is shared in data_augmentation folder.
 
