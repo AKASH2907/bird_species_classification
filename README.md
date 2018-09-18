@@ -21,7 +21,8 @@ The code is documented and designed to be easy to extend. If you use it in your 
 * [gen_train_data_test_data.py](https://github.com/AKASH2907/bird-species-classification/blob/master/gen_train_data_test_data.py) - Generates X_train, Y_train, X_validation, Y_validation, X_test, Y_test
 * [inception_v3_finetune.py](https://github.com/AKASH2907/bird-species-classification/blob/master/inception_v3_finetune.py) - Multi-stage Training on Mask R-CNN crops generated and then on data augmented original images.
 * [inception_resnet_v2_finetune.py](https://github.com/AKASH2907/bird-species-classification/blob/master/inception_resnet_v2_finetune.py) - Multi-stage Training on Mask R-CNN crops generated and then on data augmented original images resized to 416x416.
-
+* [mask_rcnn/rcnn_crops.py](https://github.com/AKASH2907/bird-species-classification/blob/master/mask_rcnn/rcnn_crops.py) - Localizes bird in the images, crops and then save them for multi-stage learning.
+* [mask_rcnn/test_images.py](https://github.com/AKASH2907/bird-species-classification/blob/master/mask_rcnn/test_images.py)
 ## Data Augmentation
 Data Augmentation has been done using [imgaug](https://imgaug.readthedocs.io/en/latest/source/augmenters.html#affine).Table for data Augmentation done for different species is shared in data_augmentation folder.
 
