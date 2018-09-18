@@ -1,7 +1,7 @@
 # bird-species-classification
 Inter species classification
 
-This is an implementation of bird species classification on Python 3 and Keras with Tensorflow backend. The architecture consists of Mask R-CNN and ImageNet models end-to-end. ImageNet models used are Inception V3 and Inception ResNet V2.
+This is an implementation of bird species classification challenge hosted by IIT Mandi in [ICCVIP Conference'18](http://www.iiitdmj.ac.in/CVIP-2018/index.html) on Python 3 and Keras with Tensorflow backend. The architecture consists of Mask R-CNN and ImageNet models end-to-end. ImageNet models used are Inception V3 and Inception ResNet V2.
 
 ![main_image](https://user-images.githubusercontent.com/22872200/45708132-49ab7380-bb9e-11e8-8bd5-8beb9f077d90.jpg)
 
@@ -44,12 +44,13 @@ To help running the model, end to end a docx has been added in case much informa
 * After applying Mask R-CNN for both, using confusion matrix Inception V3 performs better in some classes than Inception ResNet V2. Using ensembling, by taking the prediction vector ofboth the models compared them and then finally assign the class to the image whosoever has the highest prediction for certain species. This helped to improve the accuracy by almost 5% from 51 to around 56%. Tables are dicussed below.
 
 Some important sub-parts are discussed below:
-
+## Dataset
+In this repo, I have used the dataset fom the [ICCVIP'18](http://www.iiitdmj.ac.in/CVIP-2018/challenges.html) Bird Species Classification Challenge. Training dataset contains 150 images and test dataset contains 158 images with 1 image corrupted. There are total 16 species of birds to be classified. The resolution of the images lies in between 800x600 to 6000x4000.
 ## Data Augmentation
 Data Augmentation has been done using [imgaug](https://imgaug.readthedocs.io/en/latest/source/augmenters.html#affine).Table for data Augmentation done for different species is shared in [data_augmentation folder](https://github.com/AKASH2907/bird-species-classification/tree/master/data_augmentation).
 
 ## Mask R-CNN
-Mask R-CNN on the whole image helped to localize birds in the image. Below are the examples of the birds detection from a high resolution image. As the Mask R-CNN is trained on COCO dataset and it has **bird** class, it carves out bird ROIs very perfectly. More than 140 images were able to give successful cropped bird images out of 150 images.
+Mask R-CNN on the whole image helped to localize birds in the image. Below are the examples of the birds detection from a high resolution image. As the Mask R-CNN is trained on COCO dataset and it has **bird** class, it carves out bird ROIs very perfectly. More than 140 images were able to give successfull cropped bird images out of 150 images.
 
 ![mask_rcnn](https://user-images.githubusercontent.com/22872200/45112827-5b385880-b166-11e8-94c1-8d42edb4a2c6.jpg)
 
@@ -73,13 +74,14 @@ Inception ResNet V2  | Images| 97.29 |29.17  |47.96
 Inception ResNet V2| Images + Crops |92.29|33.69|49.09
 
 Evaluation on test data in terms of class-averaged Precision, Recall and F1-scores:
+
 Model Architecture| Precision | Recall | F1
 ------------- | -------- | ---------  | ---------- 
 Mask R-CNN + Inception V3  |  48.61 | 45.65|47.09 
 Mask R-CNN + Inception ResNet V2|  53.62| 48.72|51.05
 Mask R-CNN + Ensemble   |  **56.58** |**54.8**  |**55.67**
 
-Hope it helps!!! If youmake any progress on the dataset or face any problems, please let me know. The dataset will be loaded on Kaggle and the link will be shared soon. :simple_smile:
+Hope it helps!!! If youmake any progress on the dataset or face any problems, please let me know. The dataset will be loaded on Kaggle and the link will be shared soon.  :relaxed:
 ## References
 [1] Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, Zbigniew Wojna, "[
 Rethinking the Inception Architecture for Computer Vision](https://arxiv.org/abs/1512.00567)" arXiv preprint arXiv:1512.00567. <br />
