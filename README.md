@@ -17,7 +17,7 @@ The repository includes:
 The code is documented and designed to be easy to extend. If you use it in your research, please consider citing this repository (bibtex below). 
 
 ## Getting Started
- * [modify_data.py](https://github.com/AKASH2907/bird-species-classification/blob/master/modify_data.py) - This code is used to rename the files. For example: 10 - Type of Data Augmentation 01- Class of Bird 01 - Image Number - 100101.jpg (Image Name)
+ * [modify_data.py](https://github.com/AKASH2907/bird-species-classification/blob/master/modify_data.py) - This code is used to rename the files. <br /> For example: 10 - Type of Data Augmentation 01- Class of Bird 01 - Image Number - 100101.jpg (Image Name)
  * [data_augmentation.py](https://github.com/AKASH2907/bird-species-classification/blob/master/data_augmentation/data_augmentation.py) - Various types of data augmentation used to counter the challenge of large scale variation in illumination,scale, etc. and class imbalance.
  * [create_validation.py](https://github.com/AKASH2907/bird-species-classification/blob/master/create_validation.py) - Used to create Validation data randomly from the augmented training data.
 * [gen_train_data_test_data.py](https://github.com/AKASH2907/bird-species-classification/blob/master/gen_train_data_test_data.py) - Generates X_train, Y_train, X_validation, Y_validation, X_test, Y_test
@@ -26,6 +26,14 @@ The code is documented and designed to be easy to extend. If you use it in your 
 * [mask_rcnn/rcnn_crops.py](https://github.com/AKASH2907/bird-species-classification/blob/master/mask_rcnn/rcnn_crops.py) - Localizes bird in the images, crops and then save them for multi-stage learning.
 * [mask_rcnn/test_images.py](https://github.com/AKASH2907/bird-species-classification/blob/master/mask_rcnn/test_images.py) - 
 End-to-end model of classifying bird specie using Mask R-CNN and **ensembling** of Inception V3 and Inception ResNet V2.
+* [evaluate.py](https://github.com/AKASH2907/bird-species-classification/blob/master/evaluate.py) - Calculation of class-averaged precision, recall and F1-scores.
+
+## Step by Step Classification
+To help running the model, end to end a docx has been added in case much information about each funcation and thier parameters are required. Here are sthe steps in summary:
+
+* From the original training data, firstly several data augmentation were taken careof as the dataset contains only 150 images. The huge number of parameters were unable to learn and generalize in case of validaion data. This also helps in decreasing the effect of class imbalance. Some classes have 6 images whereas some have around 20 images.
+* After the data augmentation, validation dataset is created. 10% of each bird species were taken into validation data for model performance testing.
+* 
 
 ## Data Augmentation
 Data Augmentation has been done using [imgaug](https://imgaug.readthedocs.io/en/latest/source/augmenters.html#affine).Table for data Augmentation done for different species is shared in data_augmentation folder.
