@@ -31,9 +31,18 @@ End-to-end model of classifying bird specie using Mask R-CNN and **ensembling** 
 ## Step by Step Classification
 To help running the model, end to end a docx has been added in case much information about each funcation and thier parameters are required. Here are sthe steps in summary:
 
-* From the original training data, firstly several data augmentation were taken careof as the dataset contains only 150 images. The huge number of parameters were unable to learn and generalize in case of validaion data. This also helps in decreasing the effect of class imbalance. Some classes have 6 images whereas some have around 20 images.
+* From the original training data, firstly several data augmentation were taken careof as the dataset contains only 150 images. The number of images were increased to around 1330. The huge number of parameters were unable to learn and generalize in case of validaion data. This also helps in decreasing the effect of class imbalance. Some classes have 6 images whereas some have around 20 images.
 * After the data augmentation, validation dataset is created. 10% of each bird species were taken into validation data for model performance testing.
-* 
+* The model were trained on various Imagenet models such as AlexNet, VGG-16/19, ResNet50, Inception V3 and Inception ResNet V2 with pretrained Imagenet weights. Inception ResNet V2 outperforms them all.
+* Multi-stage training comes after that. Used Mask R-CNN to localize birds in the images in their original resolution. Single Shot Detector and YOLO were also used but they needs to be resized images into 416x416 or 512x512 due to which many information is lost. Mask R-CNN code and modules are well explained in this github [repo](https://github.com/matterport/Mask_RCNN). As Mask R-CNN is trained on COCO dataset, and COCO has a class of bird specie, it helped me to crop birds in most of the cases.
+* After getting the crops, data augmentation on the cropped images were done and dataset was increased to around 1600 images. Performed multi-stage training with both the dataset of cropped images as well as original images. It helps to improve the accuracy by around 10% in case of Inception V3 model and 2% in Inception ResNet V2.
+* Created an architecture end-to-end of Mask R-CNN and Trained Inception models for testing purposes. All the testing images were first passed through Mask R-CNN. After that, it splits into two cases:
+  * If the Mask R-CNN is successful to detect bird, which it mostly did, the birdsare cropped from the original and then passed through trained Imagenet models for classification trained on crops and whole images.
+  * If the Mask R-CNN fails, then the whole image is classified using pre-trained weights of Imagenet models trained only on original images.
+  * It helped to improve the accuracy by 2% from 49 to 51.
+  
+* After applying Mask R-CNN for both, using confusion matrix Inception V3 performs better in some classes than Inception ResNet V2. Using ensembling, by taking the prediction vector ofboth the models compared them and then finally assign the class to the image whosoever has the highest prediction for certain species. This helped to improve the accuracy by almost 5% from 51 to around 56%. Tables are dicussed below.
+
 
 ## Data Augmentation
 Data Augmentation has been done using [imgaug](https://imgaug.readthedocs.io/en/latest/source/augmenters.html#affine).Table for data Augmentation done for different species is shared in data_augmentation folder.
