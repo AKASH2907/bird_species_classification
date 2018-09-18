@@ -73,13 +73,13 @@ Inception ResNet V2  | Images| 97.29 |29.17  |47.96
 Inception ResNet V2| Images + Crops |92.29|33.69|49.09
 
 Evaluation on test data in terms of class-averaged Precision, Recall and F1-scores:
-Model Architecture| Data Subset | Train | Validation | Test
-------------- | -------- | ---------  | ---------- | ----------
-Inception V3  | Images| 91.26 | 12.76|30.95 
-Inception V3| Images + Crops| 93.97| 15.50|41.66
-Inception ResNet V2  | Images| 97.29 |29.17  |47.96
+Model Architecture| Precision | Recall | F1
+------------- | -------- | ---------  | ---------- 
+Mask R-CNN + Inception V3  |  48.61 | 45.65|47.09 
+Mask R-CNN + Inception ResNet V2|  53.62| 48.72|51.05
+Mask R-CNN + Ensemble   |  **56.58** |**54.8**  |**55.67**
 
-
+Hope it helps!!! If youmake any progress on the dataset or face any problems, please let me know. The dataset will be loaded on Kaggle and the link will be shared soon. :simple_smile:
 ## References
 [1] Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, Zbigniew Wojna, "[
 Rethinking the Inception Architecture for Computer Vision](https://arxiv.org/abs/1512.00567)" arXiv preprint arXiv:1512.00567. <br />
