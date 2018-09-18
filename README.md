@@ -29,7 +29,7 @@ End-to-end model of classifying bird specie using Mask R-CNN and **ensembling** 
 * [evaluate.py](https://github.com/AKASH2907/bird-species-classification/blob/master/evaluate.py) - Calculation of class-averaged precision, recall and F1-scores.
 
 ## Step by Step Classification
-To help running the model, end to end a docx has been added in case much information about each funcation and thier parameters are required. Here are sthe steps in summary:
+To help running the model, end to end a docx has been added in case much information about each funcation and thier parameters are required. Here are the steps in summary:
 
 * From the original training data, firstly several data augmentation were taken careof as the dataset contains only 150 images. The number of images were increased to around 1330. The huge number of parameters were unable to learn and generalize in case of validaion data. This also helps in decreasing the effect of class imbalance. Some classes have 6 images whereas some have around 20 images.
 * After the data augmentation, validation dataset is created. 10% of each bird species were taken into validation data for model performance testing.
@@ -43,32 +43,42 @@ To help running the model, end to end a docx has been added in case much informa
   
 * After applying Mask R-CNN for both, using confusion matrix Inception V3 performs better in some classes than Inception ResNet V2. Using ensembling, by taking the prediction vector ofboth the models compared them and then finally assign the class to the image whosoever has the highest prediction for certain species. This helped to improve the accuracy by almost 5% from 51 to around 56%. Tables are dicussed below.
 
+Some important sub-parts are discussed below:
 
 ## Data Augmentation
-Data Augmentation has been done using [imgaug](https://imgaug.readthedocs.io/en/latest/source/augmenters.html#affine).Table for data Augmentation done for different species is shared in data_augmentation folder.
-
+Data Augmentation has been done using [imgaug](https://imgaug.readthedocs.io/en/latest/source/augmenters.html#affine).Table for data Augmentation done for different species is shared in [data_augmentation folder](https://github.com/AKASH2907/bird-species-classification/tree/master/data_augmentation).
 
 ## Mask R-CNN
-Mask R-CNN on the whole image helped to localize birds in the image. Below are the examples of the birds detection from a high resolution image. As the Mask R-CNN is trained on COCO dataset and it has **bird** class, it carves out bird ROIs very perfectly.
+Mask R-CNN on the whole image helped to localize birds in the image. Below are the examples of the birds detection from a high resolution image. As the Mask R-CNN is trained on COCO dataset and it has **bird** class, it carves out bird ROIs very perfectly. More than 140 images were able to give successful cropped bird images out of 150 images.
 
 ![mask_rcnn](https://user-images.githubusercontent.com/22872200/45112827-5b385880-b166-11e8-94c1-8d42edb4a2c6.jpg)
 
 
-## Drawbacks
+## Challenges
 
-Cases where our model failed are depicted in the below images.
+As a new dataset always have some problems whereas some major challenges too: 
+1) The training dataset mostly contains bird images in which bird were almost 10-20% of the whole image whereas in case of test images the bird contains 70-80% of the image. Sometimes, the model fails to detect the birds due to less number of birds in the dataset.
+2) In some classes the birds cover not even 10% of the whole images or the colour of bird and surrounding are ver similar. Cases where birds are brown in colour. In those cases, model fails to localize birds due to occlusion problem or background similarity problems. Some cases as follows:  
 ![drawbacks](https://user-images.githubusercontent.com/22872200/45113093-0517e500-b167-11e8-9486-f90f8620ae70.jpg)
 
 
 ## Test Results
-Results on the test data:
+Results on the test data after Multi-stage training:
 
 Model Architecture| Data Subset | Train | Validation | Test
 ------------- | -------- | ---------  | ---------- | ----------
-Inception V3  | Images| 91.26 | 13.84|30.95 
+Inception V3  | Images| 91.26 | 12.76|30.95 
 Inception V3| Images + Crops| 93.97| 15.50|41.66
 Inception ResNet V2  | Images| 97.29 |29.17  |47.96
 Inception ResNet V2| Images + Crops |92.29|33.69|49.09
+
+Evaluation on test data in terms of class-averaged Precision, Recall and F1-scores:
+Model Architecture| Data Subset | Train | Validation | Test
+------------- | -------- | ---------  | ---------- | ----------
+Inception V3  | Images| 91.26 | 12.76|30.95 
+Inception V3| Images + Crops| 93.97| 15.50|41.66
+Inception ResNet V2  | Images| 97.29 |29.17  |47.96
+
 
 ## References
 [1] Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, Zbigniew Wojna, "[
