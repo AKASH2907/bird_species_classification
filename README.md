@@ -64,12 +64,12 @@ As a new dataset always have some problems whereas some major challenges too:
 
 ## Experiments 
 
-I tried multi-stage training with training on original images first and then on crops and on crops and then on original images. Firstly, training on the images and then on the crops gave the better results. As well as for testing, we use Inception V3 crops weights and Inception ResNet V2 crops+images weights to identify the specie of bird.
-Please find the weight file for 7 epochs a follows:
-[1] [inception_v3_crops.h5](https://drive.google.com/open?id=1aZbAKPoKTlZ3vVjhB120veu_YoSxQl6X) - Trained only on cropped images.
-[2] [inception_v3_crops+images.h5](https://drive.google.com/open?id=1kv76lIq4BQ0NycATrrMrLAD9SxnIR_AN) - Trained on Images plus crops
-[3] [inception_resnet_v2_images.h5](https://drive.google.com/open?id=1ABTrngtdJLBEwFYbRh4O6CRbTWHh-X6z) - Trained on Images only
-[4] [inception_resnet_v2_images+crops.h5](https://drive.google.com/open?id=1s6gXZ_i92qoXalx44NPgC30VMpsOyjih) - Trained on Images + crops for 7 epochs.
+I tried multi-stage training with training on original images first and then on crops and on crops and then on original images. Firstly, training on the images and then on the crops gave the better results. As well as for testing, we use Inception V3 crops weights and Inception ResNet V2 crops+images weights to identify the specie of bird. <br />
+Please find the weight file for 7 epochs a follows:<br />
+[1] [inception_v3_crops.h5](https://drive.google.com/open?id=1aZbAKPoKTlZ3vVjhB120veu_YoSxQl6X) - Trained only on cropped images. <br />
+[2] [inception_v3_crops+images.h5](https://drive.google.com/open?id=1kv76lIq4BQ0NycATrrMrLAD9SxnIR_AN) - Trained on Images plus crops. <br />
+[3] [inception_resnet_v2_images.h5](https://drive.google.com/open?id=1ABTrngtdJLBEwFYbRh4O6CRbTWHh-X6z) - Trained on Images only. <br />
+[4] [inception_resnet_v2_images+crops.h5](https://drive.google.com/open?id=1s6gXZ_i92qoXalx44NPgC30VMpsOyjih) - Trained on Images + crops for 7 epochs. <br />
 
 We could have trained it for more epochs but it was not giving significant iprovements in the results at all. 
 
