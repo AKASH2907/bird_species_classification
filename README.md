@@ -97,7 +97,10 @@ Mask R-CNN + Ensemble   |  **56.58** |**54.8**  |**55.67**
 Final Confusion Matrix:
 ![final_confusion_matrix](https://user-images.githubusercontent.com/22872200/45716831-b4b47480-bbb5-11e8-9d76-e576dfb8cc11.jpeg)
 
-Hope it helps!!! If youmake any progress on the dataset or face any problems, please let me know. The dataset will be loaded on Kaggle and the link will be shared soon.  :relaxed:
+Hope it helps!!! If youmake any progress on the dataset or face any problems, please let me know. :relaxed:
+
+The dataset is uploaded on Kaggle and the link is shared as follow:
+[Dataset](https://www.kaggle.com/akash2907/bird-species-classification)
 ## References
 [1] Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, Zbigniew Wojna, "[
 Rethinking the Inception Architecture for Computer Vision](https://arxiv.org/abs/1512.00567)" arXiv preprint arXiv:1512.00567. <br />
