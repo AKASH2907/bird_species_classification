@@ -75,6 +75,11 @@ Please find the weight file for 7 epochs a follows:<br />
 
 We could have trained it for more epochs but it was not giving significant iprovements in the results at all. 
 
+## Model Architecture
+
+The architecture of the model is as below:
+![model_architecture](https://user-images.githubusercontent.com/22872200/46626495-29dfed80-cb55-11e8-97e1-284bafcec51c.png)
+
 
 ## Test Results
 Results on the test data after Multi-stage training:
