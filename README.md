@@ -1,7 +1,7 @@
 # bird-species-classification
 Inter species classification
 
-# :relaxed:***[CHALLENGE WINNERS](http://www.iiitdmj.ac.in/CVIP-2018/BPA.html)***:relaxed:
+# :relaxed:[***CHALLENGE WINNERS***](http://www.iiitdmj.ac.in/CVIP-2018/BPA.html):relaxed:
 
 This is an implementation of bird species classification challenge hosted by IIT Mandi in [ICCVIP Conference'18](http://www.iiitdmj.ac.in/CVIP-2018/index.html) on Python 3 and Keras with Tensorflow backend. The architecture consists of Mask R-CNN and ImageNet models end-to-end. ImageNet models used are Inception V3 and Inception ResNet V2.
 
