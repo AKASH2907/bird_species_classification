@@ -1,7 +1,7 @@
 # bird-species-classification
 Inter species classification
 
-# :relaxed:***CHALLENGE WINNERS***:relaxed:
+# :relaxed:***[CHALLENGE WINNERS](http://www.iiitdmj.ac.in/CVIP-2018/BPA.html)***:relaxed:
 
 This is an implementation of bird species classification challenge hosted by IIT Mandi in [ICCVIP Conference'18](http://www.iiitdmj.ac.in/CVIP-2018/index.html) on Python 3 and Keras with Tensorflow backend. The architecture consists of Mask R-CNN and ImageNet models end-to-end. ImageNet models used are Inception V3 and Inception ResNet V2.
 
@@ -100,7 +100,9 @@ Final Confusion Matrix:
 Hope it helps!!! If youmake any progress on the dataset or face any problems, please let me know. :relaxed:
 
 The dataset is uploaded on Kaggle and the link is shared as follow:
-[Dataset](https://www.kaggle.com/akash2907/bird-species-classification)
+[Dataset](https://www.kaggle.com/akash2907/bird-species-classification) <br />
+
+Description of all the codes have been shared in this [PDF](https://github.com/AKASH2907/bird-species-classification/blob/master/Codes_info.pdf)
 ## References
 [1] Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, Zbigniew Wojna, "[
 Rethinking the Inception Architecture for Computer Vision](https://arxiv.org/abs/1512.00567)" arXiv preprint arXiv:1512.00567. <br />
