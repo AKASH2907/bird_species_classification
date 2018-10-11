@@ -108,6 +108,8 @@ The dataset is uploaded on Kaggle and the link is shared as follow:
 [Dataset](https://www.kaggle.com/akash2907/bird-species-classification) <br />
 
 Description of all the codes have been shared in this [PDF](https://github.com/AKASH2907/bird-species-classification/blob/master/Codes_info.pdf)
+
+Paper uploaded on arXiv: prePrint Version: **[Bird Species Classification with Transfer Learning using Multistage Training](https://assert.pub/papers/1810.04250)**
 ## References
 [1] Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, Zbigniew Wojna, "[
 Rethinking the Inception Architecture for Computer Vision](https://arxiv.org/abs/1512.00567)" arXiv preprint arXiv:1512.00567. <br />
