@@ -78,7 +78,7 @@ We could have trained it for more epochs but it was not giving significant iprov
 ## Model Architecture
 
 The architecture of the model is as below:
-![model_architecture](https://user-images.githubusercontent.com/22872200/46626495-29dfed80-cb55-11e8-97e1-284bafcec51c.png)
+![model_architecture](https://user-images.githubusercontent.com/22872200/46885052-69b81500-ce74-11e8-9465-99a4c4af0ebb.png)
 
 
 ## Test Results
@@ -104,12 +104,15 @@ Final Confusion Matrix:
 
 Hope it helps!!! If youmake any progress on the dataset or face any problems, please let me know. :relaxed:
 
+## Extras
 The dataset is uploaded on Kaggle and the link is shared as follow:
 [Dataset](https://www.kaggle.com/akash2907/bird-species-classification) <br />
 
 Description of all the codes have been shared in this [PDF](https://github.com/AKASH2907/bird-species-classification/blob/master/Codes_info.pdf)
 
-Paper uploaded on arXiv: prePrint Version: **[Bird Species Classification with Transfer Learning using Multistage Training](https://assert.pub/papers/1810.04250)**
+Medium Post: [Bird Species Classification in High Resolution Images](https://medium.com/@akash29/bird-species-classification-in-high-resolution-images-28a5885f94f2)
+
+Paper uploaded on arXiv: prePrint Version: **[Bird Species Classification with Transfer Learning using Multistage Training](https://arxiv.org/abs/1810.04250)**
 ## References
 [1] Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, Zbigniew Wojna, "[
 Rethinking the Inception Architecture for Computer Vision](https://arxiv.org/abs/1512.00567)" arXiv preprint arXiv:1512.00567. <br />
