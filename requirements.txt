@@ -1,0 +1,7 @@
+numpy
+pillow
+matplotlib
+opencv-python
+keras
+git+https://github.com/aleju/imgaug
+sklearn
