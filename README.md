@@ -1,5 +1,6 @@
 # bird-species-classification
 Inter species classification
+Paper accepted at 3rd WCVA Workshop, 11th ICVGIP Conference.
 
 # :relaxed:[***CHALLENGE WINNERS***](http://www.iiitdmj.ac.in/CVIP-2018/BPA.html):relaxed:
 
@@ -49,6 +50,20 @@ To help running the model, end to end a docx has been added in case much informa
   * It helped to improve the accuracy by 2% from 49 to 51.
   
 * After applying Mask R-CNN for both, using confusion matrix Inception V3 performs better in some classes than Inception ResNet V2. Using ensembling, by taking the prediction vector ofboth the models compared them and then finally assign the class to the image whosoever has the highest prediction for certain species. This helped to improve the accuracy by almost 5% from 51 to around 56%. Tables are dicussed below.
+
+## Citation
+If you use this repository, please use this bibtex to cite the paper:
+ ```javascript
+@article{DBLP:journals/corr/abs-1810-04250,
+  author    = {Akash Kumar and
+               Sourya Dipta Das},
+  title     = {Bird Species Classification using Transfer Learning with Multistage
+               Training},
+  journal   = {CoRR},
+  volume    = {abs/1810.04250},
+  year      = {2018}
+} 
+```
 
 Some important sub-parts are discussed below:
 ## Dataset
