@@ -1,6 +1,6 @@
 # bird-species-classification
 Inter species classification
-Paper accepted at 3rd WCVA Workshop, 11th ICVGIP Conference.
+**Updates: Paper accepted at 3rd WCVA Workshop, 11th ICVGIP'18 Conference :grimacing:**
 
 # :relaxed:[***CHALLENGE WINNERS***](http://www.iiitdmj.ac.in/CVIP-2018/BPA.html):relaxed:
 
