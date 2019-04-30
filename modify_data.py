@@ -17,7 +17,7 @@ def rename_files():
 	for i in species:
 
 		# 
-		source = join(datapath, i)
+		source = join(initial, i)
 		files = listdir(source)
 		files.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
 
