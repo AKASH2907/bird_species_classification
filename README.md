@@ -56,14 +56,18 @@ To help running the model, end to end a docx has been added in case much informa
 ## Citation
 If you use this repository, please use this bibtex to cite the paper:
  ```javascript
-@article{DBLP:journals/corr/abs-1810-04250,
-  author    = {Akash Kumar and
-               Sourya Dipta Das},
-  title     = {Bird Species Classification using Transfer Learning with Multistage
-               Training},
-  journal   = {CoRR},
-  volume    = {abs/1810.04250},
-  year      = {2018}
+@InProceedings{10.1007/978-981-15-1387-9_3,
+author="Kumar, Akash
+and Das, Sourya Dipta",
+editor="Arora, Chetan
+and Mitra, Kaushik",
+title="Bird Species Classification Using Transfer Learning with Multistage Training",
+booktitle="Computer Vision Applications",
+year="2019",
+publisher="Springer Singapore",
+address="Singapore",
+pages="28--38",
+isbn="978-981-15-1387-9"
 } 
 ```
 
