@@ -19,7 +19,7 @@ def create_validation():
 		destination = join(final, i)
 
 		files = listdir(source)
-
+		number = len(files)
 		if(number<78):
 			samples = random.sample(files, 6)
 			for file in samples:
