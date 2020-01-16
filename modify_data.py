@@ -43,15 +43,14 @@ def rename_files():
 
         #
         source_image_dir = join(source_folder, bird_specie)
+        print(source_image_dir)
         source_images = listdir(source_image_dir)
-        # sorts the file according to the numerical present in the image name
-        source_images.sort(key=lambda f: int("".join(filter(str.isdigit, f))))
+        print(source_images)
 
         for source_image in source_images:
 
-            if not exists(join(destination_folder, bird_specie)):
-                destination = makedirs(join(destination_folder, bird_specie))
-
+            destination = join(destination_folder, bird_specie)
+            print(destination)
             if bird_specie_counter < 10:
 
                 images = 0
@@ -120,5 +119,7 @@ def rename_files():
 
 
 if __name__ == "__main__":
-
+    for bird_specie in species:
+        if not exists(join(destination_folder, bird_specie)):
+            destination = makedirs(join(destination_folder, bird_specie))
     rename_files()
