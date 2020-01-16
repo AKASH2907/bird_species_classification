@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
-from os.path import isfile, join
-from os import rename, listdir, rename, makedirs
+from os.path import join
+from os import listdir
 from keras.utils import np_utils
 
 species = [
@@ -24,10 +24,13 @@ species = [
 ]
 
 datapath = "./"
+N_CLASSES = 16  # Number of classes
 
 
-# Generates training, validation and testing files
 def gen_data():
+    """Generate numpy files for training, validation and
+    testing.
+    """
     X_train = []
     Y_train = []
     X_valid = []
@@ -35,41 +38,39 @@ def gen_data():
     X_test = []
     Y_test = []
     count = 0
-    for i in species:
+    for bird_specie in species:
 
         # Samples Location
-        train_samples = join(datapath, "train/" + i)
-        valid_samples = join(datapath, "valid/" + i)
-        test_samples = join(datapath, "test/" + i)
+        train_data = join(datapath, "train/" + bird_specie)
+        val_data = join(datapath, "valid/" + bird_specie)
+        test_data = join(datapath, "test/" + bird_specie)
 
         # Samples Files
-        train_files = listdir(train_samples)
-        valid_files = listdir(valid_samples)
-        test_files = listdir(test_samples)
+        train_files = listdir(train_data)
+        valid_files = listdir(val_data)
+        test_files = listdir(test_data)
 
-        # Sorting according to the number
-        train_files.sort(key=lambda f: int("".join(filter(str.isdigit, f))))
-        valid_files.sort(key=lambda f: int("".join(filter(str.isdigit, f))))
-        test_files.sort(key=lambda f: int("".join(filter(str.isdigit, f))))
+        for img_file in train_files:
 
-        for j in train_files:
-
-            im = join(train_samples, j)
-            img = cv2.imread(im, 1)
+            im = join(train_data, img_file)
+            img = cv2.imread(im)
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             img = cv2.resize(img, (416, 416))
             X_train.append(img)
             Y_train += [count]
 
-        for k in test_files:
-            im = join(test_samples, k)
-            img = cv2.imread(im, 1)
+        for img_file in test_files:
+            im = join(test_data, img_file)
+            img = cv2.imread(im)
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             img = cv2.resize(img, (416, 416))
             X_test.append(img)
             Y_test += [count]
 
-        for l in valid_files:
-            im = join(test_samples, l)
-            img = cv2.imread(im, 1)
+        for img_file in valid_files:
+            im = join(val_data, img_file)
+            img = cv2.imread(im)
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             img = cv2.resize(img, (416, 416))
             X_valid.append(img)
             Y_valid += [count]
@@ -80,9 +81,9 @@ def gen_data():
     X_train /= 255
     Y_train = np.asarray(Y_train)
 
-    X_valid = np.asarray(X_train).astype("float32")
+    X_valid = np.asarray(X_valid).astype("float32")
     X_valid /= 255
-    Y_valid = np, asarray(Y_valid)
+    Y_valid = np.asarray(Y_valid)
 
     X_test = np.asarray(X_test).astype("float32")
     X_test /= 255
