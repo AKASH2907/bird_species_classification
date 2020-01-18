@@ -7,14 +7,30 @@ import skimage.io
 import matplotlib
 import matplotlib.pyplot as plt
 import cv2
-from os.path import isfile, join
+from os.path import isfile, join, exists
 from os import rename, listdir, rename, makedirs
 
 # Root directory of the project
-ROOT_DIR = os.path.abspath("./")
+ROOT_DIR = os.path.abspath("../train_images")
 
-species = ["blasti","bonegl", "brhkyt", "cbrtsh", "cmnmyn", "gretit", "hilpig", "himbul", "himgri", "hsparo", 
-"indvul", "jglowl", "lbicrw", "mgprob", "rebimg", "wcrsrt"]
+species = [
+    "blasti",
+    "bonegl",
+    "brhkyt",
+    "cbrtsh",
+    "cmnmyn",
+    "gretit",
+    "hilpig",
+    "himbul",
+    "himgri",
+    "hsparo",
+    "indvul",
+    "jglowl",
+    "lbicrw",
+    "mgprob",
+    "rebimg",
+    "wcrsrt",
+]
 
 # Import Mask RCNN
 sys.path.append(ROOT_DIR)  # To find local version of the library
@@ -46,12 +62,12 @@ class InferenceConfig(coco.CocoConfig):
     GPU_COUNT = 1
     IMAGES_PER_GPU = 1
 
+
 config = InferenceConfig()
 config.display()
 
 
-
-# Create model object in inference mode.# Creat 
+# Create model object in inference mode.# Creat
 model = modellib.MaskRCNN(mode="inference", model_dir=MODEL_DIR, config=config)
 
 # Load weights trained on MS-COCO
@@ -61,71 +77,141 @@ model.load_weights(COCO_MODEL_PATH, by_name=True)
 # COCO Class names
 # Index of the class in the list is its ID. For example, to get ID of
 # the teddy bear class, use: class_names.index('teddy bear')
-class_names = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
-               'bus', 'train', 'truck', 'boat', 'traffic light',
-               'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird',
-               'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear',
-               'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie',
-               'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball',
-               'kite', 'baseball bat', 'baseball glove', 'skateboard',
-               'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup',
-               'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple',
-               'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza',
-               'donut', 'cake', 'chair', 'couch', 'potted plant', 'bed',
-               'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote',
-               'keyboard', 'cell phone', 'microwave', 'oven', 'toaster',
-               'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors',
-               'teddy bear', 'hair drier', 'toothbrush']
-
-
+class_names = [
+    "BG",
+    "person",
+    "bicycle",
+    "car",
+    "motorcycle",
+    "airplane",
+    "bus",
+    "train",
+    "truck",
+    "boat",
+    "traffic light",
+    "fire hydrant",
+    "stop sign",
+    "parking meter",
+    "bench",
+    "bird",
+    "cat",
+    "dog",
+    "horse",
+    "sheep",
+    "cow",
+    "elephant",
+    "bear",
+    "zebra",
+    "giraffe",
+    "backpack",
+    "umbrella",
+    "handbag",
+    "tie",
+    "suitcase",
+    "frisbee",
+    "skis",
+    "snowboard",
+    "sports ball",
+    "kite",
+    "baseball bat",
+    "baseball glove",
+    "skateboard",
+    "surfboard",
+    "tennis racket",
+    "bottle",
+    "wine glass",
+    "cup",
+    "fork",
+    "knife",
+    "spoon",
+    "bowl",
+    "banana",
+    "apple",
+    "sandwich",
+    "orange",
+    "broccoli",
+    "carrot",
+    "hot dog",
+    "pizza",
+    "donut",
+    "cake",
+    "chair",
+    "couch",
+    "potted plant",
+    "bed",
+    "dining table",
+    "toilet",
+    "tv",
+    "laptop",
+    "mouse",
+    "remote",
+    "keyboard",
+    "cell phone",
+    "microwave",
+    "oven",
+    "toaster",
+    "sink",
+    "refrigerator",
+    "book",
+    "clock",
+    "vase",
+    "scissors",
+    "teddy bear",
+    "hair drier",
+    "toothbrush",
+]
 
 
 # Train Images path
-image_path = '../train_data/'
+image_path = "../train_data/"
 
 # Load Test images
-for i in species:
-	specie = join(image_path, i)
+for bird_specie in species:
+    specie = join(image_path, bird_specie)
 
-	files = listdir(specie)
-	# Files sorting
-	files.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
+    files = listdir(specie)
+    # Files sorting
+    files.sort(key=lambda f: int("".join(filter(str.isdigit, f))))
 
-	birds = 1
+    birds = 1
 
-	# Detect birds in each class
-	for file in files:
+    if not exists(join("../mask_rcnn_crops/", bird_specie)):
+    	makedirs(join("../mask_rcnn_crops/", bird_specie))
+    	
+    # Detect birds in each class
+    for file in files:
 
-		img_path = join(specie, file)
+        img_path = join(specie, file)
 
-		image = cv2.imread(img_path, 1)
+        image = cv2.imread(img_path, 1)
 
-		result = model.detect([image], verbose=1)
+        result = model.detect([image], verbose=1)
 
-		res = result[0]
+        res = result[0]
 
-		number_of_rois = len(res['rois'])
+        number_of_rois = len(res["rois"])
 
-		imgs = 1
+        imgs = 1
 
-		for j in range(number_of_rois):
+        for j in range(number_of_rois):
 
-			# If bird is found append then crop the bird out of that image
-			if(res['class_ids'][j]==15):
+            # If bird is found append then crop the bird out of that image
+            if res["class_ids"][j] == 15:
 
-				y1, x1, y2, x2 = res['rois'][j]
+                y1, x1, y2, x2 = res["rois"][j]
 
-				crop = image[y1:y2, x1:x2]
+                crop = image[y1:y2, x1:x2]
 
-				cv2.imwrite('../mask_rcnn_crops_test/' + i + '/' + str(birds) + str(imgs) + '.jpg', crop)
+                cv2.imwrite(
+                    "../mask_rcnn_crops/"
+                    + bird_specie
+                    + "/"
+                    + str(birds)
+                    + str(imgs)
+                    + ".jpg",
+                    crop,
+                )
 
-				imgs+=1
+                imgs += 1
 
-		birds+=1
-
-
-
-
-
-
-
+        birds += 1

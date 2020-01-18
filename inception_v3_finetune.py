@@ -1,18 +1,14 @@
 import math
 import numpy as np
 from keras.layers import (
-    Conv2D,
-    MaxPooling2D,
     Dense,
     Activation,
     Dropout,
     Flatten,
-    Input,
     AveragePooling2D,
 )
 from keras.optimizers import Adam
 from keras.models import Model
-from keras.utils import plot_model, np_utils
 from keras.callbacks import LearningRateScheduler
 from keras import backend as K
 from keras.utils.generic_utils import get_custom_objects
@@ -102,16 +98,22 @@ def build_inceptionV3(
 
     # Get base model
     base_model = InceptionV3(
-        include_top=False, weights=weights, input_tensor=None, input_shape=img_shape
+        include_top=False,
+        weights=weights,
+        input_tensor=None,
+        input_shape=img_shape
     )
 
     # Add final layers
     x = base_model.output
     x = AveragePooling2D((8, 8), strides=(8, 8), name="avg_pool")(x)
     x = Flatten(name="flatten")(x)
-    x = Dense(512, activation="swish", name="dense_1", kernel_initializer="he_uniform")(
-        x
-    )
+    x = Dense(
+              512,
+              activation="swish",
+              name="dense_1",
+              kernel_initializer="he_uniform"
+    )(x)
     x = Dropout(0.25)(x)
     predictions = Dense(
         n_classes,
@@ -141,7 +143,9 @@ def build_inceptionV3(
     # Compiling Model with Adam Optimizer
     adam = Adam(0.0001)
     model.compile(
-        loss="categorical_crossentropy", optimizer=adam, metrics=[precision, recall, f1]
+        loss="categorical_crossentropy",
+        optimizer=adam,
+        metrics=[precision, recall, f1]
     )
     return model
 
@@ -159,7 +163,7 @@ if __name__ == "__main__":
     # x_valid          = np.load('X_valid.npy')
     # y_valid          = np.load('Y_valid.npy')
 
-    # Loading Original Images for Testing rsized to 416x416
+    # Loading Original Images for Testing resized to 416x416
     x_test = np.load("X_test.npy")
     y_test = np.load("Y_test_categorical.npy")
 
@@ -175,7 +179,10 @@ if __name__ == "__main__":
     model.load_weights("inception_v3_crops+images.h5")
 
     # Model Fitting
-    # history = model.fit(x_train_original, y_train_original, batch_size=BATCH_SIZE, epochs=EPOCHS, verbose= 1,
+    # history = model.fit(x_train_original, y_train_original,
+    #       batch_size=BATCH_SIZE,
+    #       epochs=EPOCHS,
+    #       verbose= 1,
     #     # steps_per_epoch=x_train.shape[0]//BATCH_SIZE,
     #     callbacks = [lrate],
     #     validation_data=(x_valid, y_valid)
