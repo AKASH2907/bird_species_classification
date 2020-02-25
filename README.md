@@ -143,4 +143,5 @@ Paper uploaded on arXiv: prePrint Version: **[Bird Species Classification with T
 [1] Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, Zbigniew Wojna, "[
 Rethinking the Inception Architecture for Computer Vision](https://arxiv.org/abs/1512.00567)" arXiv preprint arXiv:1512.00567. <br />
 [2] Christian Szegedy, Sergey Ioffe, Vincent Vanhoucke, Alex Alemi, "[Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning](https://arxiv.org/abs/1602.07261)" arXiv preprint arXiv:1602.07261. <br />
-[3] Kaiming He, Georgia Gkioxari, Piotr Dollár, Ross Girshick, "[Mask R-CNN](https://arxiv.org/abs/1703.06870)" arXiv preprint arXiv:1703.06870 
+[3] Kaiming He, Georgia Gkioxari, Piotr Dollár, Ross Girshick, "[Mask R-CNN](https://arxiv.org/abs/1703.06870)" arXiv preprint arXiv:1703.06870. <br />
+[4] Mask R-CNN Github repo. "[Link](https://github.com/matterport/Mask_RCNN)" <br />
