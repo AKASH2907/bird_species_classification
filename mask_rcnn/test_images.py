@@ -317,7 +317,9 @@ model_inception_resnet_v2.load_weights("../inception_resnet_images+crop.h5")
 image_path = "../tests/"
 
 y_pred = []
-
+y_pred_irv = []
+y_pred_new = []
+    
 for i in species:
     specie = join(image_path, i)
 
